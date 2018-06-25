@@ -49,15 +49,18 @@ ul li.checked::before {
 }
 .enterbox-adj{
 	text-align: center;
+    /*padding-right: 30%;
+    padding-top: 1%;
+    padding-left: 1%;*/
 }
 
-.enterboc-adj>input{
+.enterbox-adj>input{
 	border: 2px solid black;
     margin: 19px;
-    padding-top: 5px;
-    padding-right: 86px;
-    padding-bottom: 7px;
-    padding-left: 9px;
+    padding-top: 1%;
+    padding-right: 17%;
+    padding-bottom: 1%;
+    padding-left: 1%;
 }
 
 .add-icon-container{
