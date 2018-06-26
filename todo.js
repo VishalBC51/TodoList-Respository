@@ -34,11 +34,11 @@ var boolean = false;
 var obj;
 
 function addnewElement() {
-     var itm = JSON.parse(localStorage.getItem("todo"));
-       if(itm != null && itm.length != 0 ){
+    var itm = JSON.parse(localStorage.getItem("todo"));
+    if (itm != null && itm.length != 0) {
         renderall();
-        i=itm.length;
-       }
+        i = itm.length;
+    }
 
     li = document.createElement("li");
     inputValue = document.getElementById("myInput").value;
@@ -49,11 +49,13 @@ function addnewElement() {
         li.setAttribute('id', idno);
         li.className = "listItem";
         li.setAttribute('draggable', true);
-        li.setAttribute('ondragned', "dragEnd()");
+        li.setAttribute('ondragend', "dragEnd()");
         li.setAttribute('ondragover', "dragOver(event)");
         li.setAttribute('ondragstart', "dragStart(event)");
         t = document.createTextNode(inputValue);
-        li.appendChild(t);
+        var p= document.createElement("P");
+        p.appendChild(t);
+        li.appendChild(p);
         document.getElementById("ul-items").appendChild(li);
         var span = document.createElement("SPAN");
         var txt = document.createTextNode("\u00D7");
@@ -86,7 +88,7 @@ function createobject(idno, inputValue, boolean) {
         todoboolean: boolean
     };
     arr.push(obj);
-    addToLocalStorage(obj);
+    addToLocalStorage();
 }
 
 
@@ -112,20 +114,20 @@ function closeButton() {
                 if (itm[j].todoId == div.id) {
                     // console.log(div.firstElementChild.idno+" "+itm[j].todoId);
                     arr.splice(j, 1);
-                      addToLocalStorage();
+                    addToLocalStorage();
                     break;
 
                 }
             }
-             renderall();
+            renderall();
             addToLocalStorage();
-           
-            
-        }  
-    }      
+
+
+        }
+    }
 
 }
-            
+
 
 
 var list = document.querySelector('ul');
@@ -181,7 +183,7 @@ var holdsource;
 function dragOver(e) {
 
     var mainTag;
-    if (e.target.tagName == 'SPAN') {
+    if (e.target.tagName == 'SPAN'||e.target.tagName=='P') {
         mainTag = e.target.parentNode;
     } else {
         mainTag = e.target;
@@ -229,8 +231,28 @@ function dragOver(e) {
 }
 
 function dragEnd() {
-    //   _el = null;
+    _el = null;
+    //console.log(ul.length);
+    for (var i = 0; i < list.childElementCount; i++) {
+        // var list = document.querySelector('li:nth-child('+i+')');
+
+        var mylist = list.children[i];
+        console.log(mylist);
+        arr[i].todoId = i;
+        if (list.children[i].classList.contains("checked")) {
+            arr[i].todoboolean = true;
+        } else {
+            arr[i].todoboolean = false;
+        }
+        // list=document.querySelector('#maincontainer ul li:nth-child('+i+') label')
+        arr[i].todoText = mylist.textContent;
+
+    }
+
     addToLocalStorage();
+    //    alert("HELL");
+    // localStorage.clear();
+
 }
 
 function dragStart(e) {
@@ -262,34 +284,67 @@ function isBefore(el1, el2) {
     return false;
 }
 
-// window.onload=function on;
+//  window.onload=function onreload(){
+//   i=0;
+//   renderall();
+//   var itm = JSON.parse(localStorage.getItem("todo"));
+//        if(itm != null && itm.length != 0 ){
+
+//   var ul = document.getElementById("ul-items");
+
+//   for(var j=0;j<arr.length;j++)
+//   {
+//         var li = document.createElement("li");
+//         li.setAttribute('id', itm[j].todo);
+//         li.className = "listItem";
+//         if(itm.todoboolean == true)
+//         {
+//           li.className+="checked"
+//         }
+//         li.setAttribute('draggable', true);
+//         li.setAttribute('ondragned', "dragEnd()");
+//         li.setAttribute('ondragover', "dragOver(event)");
+//         li.setAttribute('ondragstart', "dragStart(event)");
+//         t = document.createTextNode(itm[j].todoText);
+//         li.appendChild(t);
+//         document.getElementById("ul-items").appendChild(li);
+//         var span = document.createElement("SPAN");
+//         var txt = document.createTextNode("\u00D7");
+//         span.className = "close";
+//         span.appendChild(txt);
+//         li.appendChild(span);
+//         ul.appendChild(li);
+//       }
+//     } closeButton();
+
+// };
 
 function renderall() {
-    var p = 0; 
-    var temparr=[];
-    
+    var p = 0;
+    var temparr = [];
+
     var itm = JSON.parse(localStorage.getItem("todo"));
-    
-        for (var j = 0; j < itm.length; j++) 
-            {   
-              var objnew = {
-                   todoId: "item"+j,
-                   todoText: itm[j].todoText,
-                   todoboolean: itm[j].todoboolean
-                };
-                temparr.push(objnew) 
-            }
-        arr=temparr;
+    if (itm != null) {
+        for (var j = 0; j < itm.length; j++) {
+            var objnew = {
+                todoId: "item" + j,
+                todoText: itm[j].todoText,
+                todoboolean: itm[j].todoboolean
+            };
 
+            temparr.push(objnew)
+        }
+        arr = temparr;
     }
+}
 
-    
-  
 
-    // localStorage.autoalert = "false";
-    // window.alert(localStorage.getItem("autoalert"));
-    // $("input[name='activateAutoAlert']").click(function() {
-    //     var activateAutoAlert = $("input[name='activateAutoAlert']").is(":checked") ? "true" : "false";
-    //     localStorage.autoalert = activateAutoAlert;
-    //     alert(localStorage.autoalert);
-    // });
+
+
+// localStorage.autoalert = "false";
+// window.alert(localStorage.getItem("autoalert"));
+// $("input[name='activateAutoAlert']").click(function() {
+//     var activateAutoAlert = $("input[name='activateAutoAlert']").is(":checked") ? "true" : "false";
+//     localStorage.autoalert = activateAutoAlert;
+//     alert(localStorage.autoalert);
+// });
