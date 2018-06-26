@@ -26,21 +26,27 @@ wage.addEventListener("keypress", function(e) {
 var i = 0;
 
 var arr = [];
+var li;
+var inputValue;
+var t;
+var idno;
+var boolean=false;
+var obj;
 
 function addnewElement() {
-    var li = document.createElement("li");
-    var inputValue = document.getElementById("myInput").value;
+    li = document.createElement("li");
+     inputValue = document.getElementById("myInput").value;
      if (inputValue != '') {
         // alert("You must write something!");
     
-        
-    
+        idno = "item" + i++;
+    li.setAttribute('id',idno);
     li.className = "listItem";
     li.setAttribute('draggable', true);
     li.setAttribute('ondragned', "dragEnd()");
     li.setAttribute('ondragover', "dragOver(event)");
     li.setAttribute('ondragstart', "dragStart(event)");
-    var t = document.createTextNode(inputValue);
+     t = document.createTextNode(inputValue);
     li.appendChild(t);
     document.getElementById("ul-items").appendChild(li);
      var span = document.createElement("SPAN");
@@ -58,26 +64,29 @@ function addnewElement() {
     // document.getElementById("myInput").value = "";
 
    
-    id = "item" + i++;
+    // id = "item" + i++;
     // var obj=todoconstructor(id,inputValue,false);
-    let obj = {
-        todoId: id,
-        todoText: inputValue,
-        todoboolean: false
-    };
-    arr.push(obj);
-    addToLocalStorage(obj);
+
+   createobject(idno,inputValue,boolean)
 
     closeButton();
     // dragfunction();
 }
 
+function createobject(idno,inputValue,boolean){
+  let obj = {
+        todoId: idno,
+        todoText: inputValue,
+        todoboolean: boolean
+    };
+    arr.push(obj);
+    addToLocalStorage(obj);
+}
 
-function addToLocalStorage(obj)
+
+function addToLocalStorage()
 {
-  
-    
-    console.log(arr);
+    // console.log(arr);
     localStorage.setItem('todo', JSON.stringify(arr));
 }
 
@@ -90,10 +99,23 @@ function closeButton() {
             // var div = this.parentElement;
             // div.style.display = "none";
             var div = e.target.parentNode;
-            div.remove();
+            // console.log(div.id);
+           div.remove();
+           
+             var itm = JSON.parse(localStorage.getItem("todo"));
+             for (var j = 0; j <itm.length; j++) {
+               if(itm[j].todoId==div.id){
+                // console.log(div.firstElementChild.idno+" "+itm[j].todoId);
+                arr.splice(j,1);
+               
+                break;
+
+               }
+             }
+              addToLocalStorage();
            
         }
-    }addToLocalStorage();
+    }
 }
 
 
@@ -101,36 +123,65 @@ function closeButton() {
 var list = document.querySelector('ul');
 
 list.addEventListener('click', function(ev) {
-    if (ev.target.tagName === 'LI') {
-        ev.target.classList.toggle('checked');
-        addnewElement();
-    }addToLocalStorage();
+          var checkvar=ev.target;
+    if (checkvar.tagName === 'LI') {
+        checkvar.classList.toggle('checked');
+        console.log(checkvar.className);
+         var itm = JSON.parse(localStorage.getItem("todo"));
+        if(checkvar.className==='listItem checked'){
+           for (var j = 0; j <itm.length; j++) {
+               if(itm[j].todoId==checkvar.id){
+                   // checkvar.todoboolean=true;
+                   //  arr.splice(j,1);
+                   // createobject(itm[j].todoId,itm[j].todoText,true)
+                   var tempobj=arr[j];
+                   tempobj.todoboolean=true;
+                   arr[j]=tempobj;
+                   addToLocalStorage(obj);
+                   break;
+        }
+      }
+        // addnewElement();
+
+    }
+    else{
+       for (var j = 0; j <itm.length; j++) {
+               if(itm[j].todoId==checkvar.id){
+                   // checkvar.todoboolean=true;
+                    var tempobj=arr[j];
+                   tempobj.todoboolean=false;
+                   arr[j]=tempobj;
+                   addToLocalStorage(obj);
+                   break;
+        }
+      }
+      
+
+    }
+    // addToLocalStorage();
+}
 });
 
 
 
 //this
 var _el;
+var sorpos;
+var desposb;
+var desposa;
+var holdsource;
 
 function dragOver(e) {
+ e.preventDefault();
+}
 
-    var mainTag;
-    if (e.target.tagName == 'SPAN') {
-        mainTag = e.target.parentNode;
-    } else {
-        mainTag = e.target;
-    }
-    // console.log(mainTag.tagName);
-    if (isBefore(_el, e.target))
-        mainTag.parentNode.insertBefore(_el, mainTag);
-    else {
-        mainTag.parentNode.insertBefore(_el, mainTag.nextSibling);
-    }
-   
+function dragleave(e){
+   e.preventDefault();
+   e.stopPropagation();
 }
 
 function dragEnd() {
-    _el = null;
+ //   _el = null;
      addToLocalStorage();
 }
 
@@ -139,6 +190,18 @@ function dragStart(e) {
     // e.dataTransfer.setData("text/plain", null);
     _el = e.target;
     // console.log(e.target);
+      var itm = JSON.parse(localStorage.getItem("todo"));
+     for (sorpos = 0; sorpos <itm.length; sorpos++) {
+               if(itm[sorpos].todoId==_el.id){
+                   // checkvar.todoboolean=true;
+                   //  var tempobj=arr[sorpos];
+                   holdsource=arr[sorpos];
+                  // arr.splice(sorpos,1)
+                   // arr[sorpos]=tempobj;
+                   // addToLocalStorage(obj);
+                   break;
+        }
+      }addToLocalStorage();
 
 }
 
