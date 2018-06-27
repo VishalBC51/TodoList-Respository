@@ -168,7 +168,7 @@ list.addEventListener('click', function(ev) {
 
         }
         // addToLocalStorage();
-    }
+    }progressbar();
 });
 
 
@@ -245,15 +245,18 @@ function dragEnd() {
             arr[i].todoboolean = false;
         }
         // list=document.querySelector('#maincontainer ul li:nth-child('+i+') label')
-        arr[i].todoText = mylist.textContent;
+        arr[i].todoText = mylist.textContent.substring(0,[ mylist.textContent.length-1]);
 
     }
 
     addToLocalStorage();
+    ;
     //    alert("HELL");
     // localStorage.clear();
 
 }
+// renderall();
+//      addToLocalStorage()
 
 function dragStart(e) {
     // e.dataTransfer.effectAllowed = "move";
@@ -273,6 +276,8 @@ function dragStart(e) {
         }
     }
     addToLocalStorage();
+    renderall();
+     addToLocalStorage();
 
 }
 
@@ -338,6 +343,46 @@ function renderall() {
     }
 }
 
+
+function progressbar(){
+
+    if ( list.childElementCount !== 0) {
+        var count = 0;
+        for (var i = 0; i <  list.childElementCount; i++) {
+            if (list.children[i].classList.contains("checked")) {
+                count++;
+            }
+        }
+        console.log(count)
+        var progress = Math.round(count / list.childElementCount * 100);
+
+        document.querySelector(".completion").style.width = progress + "%";
+        document.querySelector(".progress-text").innerHTML = progress + "%" + " completed";
+        document.querySelector(".progress-text").style.color = "black";
+    } else {
+        document.querySelector(".completion").style.width = "0%";
+        document.querySelector(".progress-text").style.color = "transparent";
+    }
+
+
+}
+
+// var masterList;
+
+// window.onload = function(){
+//   masterList = JSON.parse(localStorage.getItem('todo')); //get data from storage
+//   if (masterList !== null) { //if data exist (todos are in storage)
+//     masterList.forEach(function(v){ //append each element into the dom
+//       var task = v;
+//       var entry = document.createElement('li'); //2
+//       var list = document.getElementById('orderedList'); //2
+//       entry.appendChild(document.createTextNode(task)); //2
+//       list.appendChild(entry); //2
+//     })
+//   } else { //if nothing exist in storage, keep todos array empty
+//     masterList = [];
+//   }
+// }
 
 
 

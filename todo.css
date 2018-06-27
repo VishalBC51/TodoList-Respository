@@ -123,3 +123,27 @@ ul li {
     -ms-user-select: none;
     user-select: none;*/
 }
+
+.progress-text{
+    max-width: 580px;
+    background-color: transparent;
+    color: transparent;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    margin: 140px auto 10px auto;
+    font-weight: bold;
+}
+
+.completion{
+    height: 100%;
+    width: 0%;
+    background-color: green;
+    transition: width 1s;
+}
+.progress{
+    max-width: 580px;
+    background-color: white;
+    height: 15px;
+    margin: 0 auto 20px auto;
+}
