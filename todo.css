@@ -1,7 +1,6 @@
 
 body{
-	background-image: url(https://i.pinimg.com/originals/10/d3/e9/10d3e908d999a794ead42c63be97d86b.jpg),
-	url(http://bellagambaam.weebly.com/uploads/7/2/5/0/72504765/1424977_orig.jpg)
+	background-image: url(https://i.pinimg.com/originals/10/d3/e9/10d3e908d999a794ead42c63be97d86b.jpg);
 }
 
 ul{
@@ -81,7 +80,7 @@ background-color: #8BC34A;
 
 
 ul li.checked::before {
-    content: '';
+   /* content: '';*/
     position: absolute;
     border-color: white;
     border-style: solid;

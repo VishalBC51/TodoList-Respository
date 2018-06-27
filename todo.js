@@ -1,16 +1,3 @@
-// function todoconstructor(id1, value1, checkedboolean) {
-//     this.id1 = id1;
-//     this.value1 = value1;
-//     this.checkedboolean = checkedboolean;
-//     return this;
-// }
-// var id1;
-// var item1;
-// var checkedboolean;
-//  var obj1 = new todoconstructor(0,1,true);
-//  alert(obj1.id1);
-
-
 
 
 
@@ -21,10 +8,44 @@ wage.addEventListener("keypress", function(e) {
     }
 });
 
+// window.onload=relaodpage;
+
+// function relaodpage(){
 
 
+//     var itm = JSON.parse(localStorage.getItem("todo"));
+//    for(var i=0;i<itm.length;i++){
+
+//     li = document.createElement("li");
+//     inputValue = itm[i].todoText;
+   
+//         // alert("You must write something!");
+
+//         idno = itm[i].todoId;
+//         li.setAttribute('id', idno);
+//         if(itm[i].todoboolean ==true)
+//         {
+//           li.className+="checked";
+//         }
+//         li.className = "listItem";
+//         li.setAttribute('draggable', true);
+//         li.setAttribute('ondragend', "dragEnd()");
+//         li.setAttribute('ondragover', "dragOver(event)");
+//         li.setAttribute('ondragstart', "dragStart(event)");
+//         t = document.createTextNode(inputValue);
+//         var p= document.createElement("P");
+//         p.appendChild(t);
+//         li.appendChild(p);
+//         document.getElementById("ul-items").appendChild(li);
+//         var span = document.createElement("SPAN");
+//         var txt = document.createTextNode("\u00D7");
+//         span.className = "close";
+//         span.appendChild(txt);
+//         li.appendChild(span);
+
+// }
+// }
 var i = 0;
-
 var arr = [];
 var li;
 var inputValue;
@@ -137,7 +158,8 @@ function closeButton() {
 var list = document.querySelector('ul');
 list.addEventListener('click', function(ev) {
     var checkvar = ev.target;
-    if (checkvar.tagName === 'LI') {
+    // console.log(checkvar.children[0].tagName);
+    if (checkvar.tagName === 'LI' || checkvar.children[0].tagName === "P") {
         checkvar.classList.toggle('checked');
         console.log(checkvar.className);
         var itm = JSON.parse(localStorage.getItem("todo"));

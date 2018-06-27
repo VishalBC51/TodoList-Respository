@@ -1,0 +1,36 @@
+.header{
+	text-align: center;
+    margin-top: 12%;
+    color: black;
+}
+.enterbox-adj{
+	text-align: center;
+    /*padding-right: 30%;
+    padding-top: 1%;
+    padding-left: 1%;*/
+}
+
+.enterbox-adj>input{
+	border: 2px solid black;
+    margin: 19px;
+    padding-top: 1%;
+    padding-right: 17%;
+    padding-bottom: 1%;
+    padding-left: 1%;
+}
+
+.add-icon-container{
+	display: inline-block;
+
+}
+
+.add-icon-container>button{
+background-color: #8BC34A;
+    color: white;
+    font-weight: bold;
+    padding-top: 4px;
+    padding-right: 12px;
+    padding-left: 15px;
+    padding-bottom: 4px;
+    border-radius: 31px;
+}

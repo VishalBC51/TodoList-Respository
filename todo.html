@@ -1,41 +1,36 @@
-
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>TODO application</title>
-     <link rel="stylesheet" type="text/css" href="todo.css">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="todo.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
 </head>
 
-<body >
+<body>
     <div id="maincontainer">
-	<header>
-		<div class="header">
-        <h1>TODO LIST</h1>
-    </div>
-    <div class="progress-text">100% completed</div>
-    <div class="progress" id="progress-bar">
-        <div class="completion"></div>
-    </div>
-
-		
-	</header>
-    
-    <div class="enterbox-adj">
-    <input type="text" id="myInput" placeholder="Add an item...">
-    <!-- <span onclick="new"></span> -->
-    <div class="add-icon-container">
-        <button id="button" onclick="addnewElement()">
-            ADD
-        </button>
-    </div>
-    </div>
-    <ul id="ul-items">
-
-    </ul>
-
-    <script type="text/javascript" src="todo.js"></script>
+        <header>
+            <div class="header">
+                <h1>TODO LIST</h1>
+            </div>
+        </header>
+        <div class="progress-text">100% completed</div>
+        <div class="progress" id="progress-bar">
+            <div class="completion"></div>
+        </div>
+        <div class="enterbox-adj">
+            <input type="text" id="myInput" placeholder="Add an item...">
+            <!-- <span onclick="new"></span> -->
+            <div class="add-icon-container">
+                <button id="button" onclick="addnewElement()">
+                    ADD
+                </button>
+            </div>
+        </div>
+        <ul id="ul-items">
+        </ul>
+        <script type="text/javascript" src="todo.js"></script>
     </div>
 </body>
 

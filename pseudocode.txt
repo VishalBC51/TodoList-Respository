@@ -1,0 +1,36 @@
+updateDOM() 
+
+* removes all the children in the todolist container
+* reads the array list and creates all the DOM elements with event handlers
+
+
+addItem()
+
+* Pushes item to list
+* Update in localstorage - setItem
+* updateDOM
+
+removeItem()
+
+* Remove item from list
+* Update in localstorage - setItem
+* updateDOM
+
+checkItem()
+
+* Update item status in list
+* Update in localstorage - setItem
+* updateDOM
+
+dropItem()
+
+* Update the array
+* Update in localstorage - setItem
+* updateDOM
+
+On page refresh
+window.onload
+
+* Check if there is key in localStorage - getItem
+* if yes updateDOM
+* if no initialise todoArray = []
