@@ -79,6 +79,7 @@ function addnewElement() {
 
     closeButton();
     // dragfunction();
+    updatedom();
 }
 
 function createobject(idno, inputValue, boolean) {
@@ -89,12 +90,14 @@ function createobject(idno, inputValue, boolean) {
     };
     arr.push(obj);
     addToLocalStorage();
+    updatedom();
 }
 
 
 function addToLocalStorage() {
     // console.log(arr);
     localStorage.setItem('todo', JSON.stringify(arr));
+    updatedom();
 }
 
 
@@ -121,6 +124,7 @@ function closeButton() {
             }
             renderall();
             addToLocalStorage();
+            updatedom();
 
 
         }
@@ -131,7 +135,6 @@ function closeButton() {
 
 
 var list = document.querySelector('ul');
-
 list.addEventListener('click', function(ev) {
     var checkvar = ev.target;
     if (checkvar.tagName === 'LI') {
@@ -169,6 +172,7 @@ list.addEventListener('click', function(ev) {
         }
         // addToLocalStorage();
     }progressbar();
+    updatedom();
 });
 
 
@@ -238,7 +242,7 @@ function dragEnd() {
 
         var mylist = list.children[i];
         console.log(mylist);
-        arr[i].todoId = i;
+        arr[i].todoId = "item"+i;
         if (list.children[i].classList.contains("checked")) {
             arr[i].todoboolean = true;
         } else {
@@ -250,6 +254,7 @@ function dragEnd() {
     }
 
     addToLocalStorage();
+    updatedom();
     ;
     //    alert("HELL");
     // localStorage.clear();
@@ -323,11 +328,11 @@ function isBefore(el1, el2) {
 //     } closeButton();
 
 // };
-
+ 
 function renderall() {
     var p = 0;
     var temparr = [];
-
+   
     var itm = JSON.parse(localStorage.getItem("todo"));
     if (itm != null) {
         for (var j = 0; j < itm.length; j++) {
@@ -335,14 +340,38 @@ function renderall() {
                 todoId: "item" + j,
                 todoText: itm[j].todoText,
                 todoboolean: itm[j].todoboolean
+
             };
+             
 
             temparr.push(objnew)
         }
         arr = temparr;
     }
+    updatedom();
 }
 
+
+updatedom();
+var ul =document.getElementById("ul-items");
+function updatedom(){
+  ul =document.getElementById("ul-items");
+   if (arr != null) {
+        for (var j = 0; j < arr.length; j++) {
+            // var objnew = {
+            //     todoId: "item" + j,
+            //     todoText: itm[j].todoText,
+            //     todoboolean: itm[j].todoboolean
+
+            // };
+                
+                ul.children[j].id = arr[j].todoId;
+
+              //  list.children[i]=mylist
+
+}
+}
+}
 
 function progressbar(){
 
@@ -375,9 +404,9 @@ function progressbar(){
 //     masterList.forEach(function(v){ //append each element into the dom
 //       var task = v;
 //       var entry = document.createElement('li'); //2
-//       var list = document.getElementById('orderedList'); //2
+//       var list3 = document.getElementById(''); //2
 //       entry.appendChild(document.createTextNode(task)); //2
-//       list.appendChild(entry); //2
+//       list3.appendChild(entry); //2
 //     })
 //   } else { //if nothing exist in storage, keep todos array empty
 //     masterList = [];
