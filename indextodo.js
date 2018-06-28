@@ -6,7 +6,6 @@ var no = 1;
 var id;
 var counter = 0;
 
-
 var itemarr=[]
 
 input.onkeydown = function (e) {
@@ -21,7 +20,7 @@ input.onkeydown = function (e) {
 
 function addNewTask(){
 
-if(input==="")
+if(input.value==="")
 	return;
 else
 	{var id = "item"+ (no++)
@@ -41,6 +40,7 @@ function addToLocalStorage(itemarr) {
     // console.log(arr);
     localStorage.setItem('todo', JSON.stringify(itemarr));
     updateDOM();
+     progressbar();
 
 }
 var itm = JSON.parse(localStorage.getItem('todo'));
@@ -53,6 +53,7 @@ while (myNode.firstChild) {
     myNode.removeChild(myNode.firstChild);
 }   
 	 itm = JSON.parse(localStorage.getItem('todo'));
+     if(itm == null) return;
 	for(var i=0;i<itm.length;i++)
 	{
 		var tempid=itm[i].todoid;
@@ -86,6 +87,7 @@ while (myNode.firstChild) {
         li.setAttribute("ondrop", "dropped(event)");
         ul.appendChild(li); 
 	}
+    // progressbar();
 }
 
 function removeItem(){
@@ -124,7 +126,9 @@ function callcheckfunc(){
             }
         }
     }
+   
    addToLocalStorage(itemarr);
+    progressbar()
 }
 
 
@@ -156,4 +160,28 @@ function dropped(evt) {
       itemarr.splice(idexs, 1);
      itemarr.splice(idexd, 0, data);
     addToLocalStorage(itemarr);
+}
+
+var list = document.querySelector('ul')
+progressbar();
+function progressbar(){
+    // list = JSON.parse(localStorage.getItem('todo'));
+    list = document.querySelector('ul')
+    if ( list.childElementCount !== 0) {
+        var count = 0;
+        for (var i = 0; i <  list.childElementCount; i++) {
+            if (list.children[i].children[1].classList.contains("checked")) {
+                count++;
+            }
+        }
+        console.log(count)
+        var progress = Math.round(count / list.childElementCount * 100);
+
+        document.querySelector(".completion").style.width = progress + "%";
+        document.querySelector(".progress-text").innerHTML = progress + "%" + " completed";
+        document.querySelector(".progress-text").style.color = "black";
+    } else {
+        document.querySelector(".completion").style.width = "0%";
+        document.querySelector(".progress-text").style.color = "transparent";
+    }
 }

@@ -34,3 +34,33 @@ background-color: #8BC34A;
     padding-bottom: 4px;
     border-radius: 31px;
 }
+
+
+.progress-text{
+    max-width: 580px;
+    background-color: transparent;
+    color: transparent;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    margin: 140px auto 10px auto;
+    font-weight: bold;
+}
+
+.completion{
+    height: 100%;
+    width: 100%;
+    background-color: green;
+    transition: width 1s;
+}
+.progress{
+    max-width: 580px;
+    background-color: white;
+    height: 15px;
+    margin: 0 auto 20px auto;
+}
+
+li{
+    display: flex;
+    justify-content: space-between;
+}
