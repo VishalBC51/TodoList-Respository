@@ -1,6 +1,6 @@
 .header{
 	text-align: center;
-    margin-top: 12%;
+    margin-top: 5%;
     color: black;
 }
 .enterbox-adj{
@@ -43,7 +43,7 @@ background-color: #8BC34A;
     height: 40px;
     font-size: 20px;
     text-align: center;
-    margin: 140px auto 10px auto;
+    margin: 0px auto 10px auto;
     font-weight: bold;
 }
 
@@ -60,7 +60,27 @@ background-color: #8BC34A;
     margin: 0 auto 20px auto;
 }
 
-li{
+.container>#task-list>li{
     display: flex;
     justify-content: space-between;
+}
+
+.item>p{
+    width: 80%;
+    word-wrap: break-word;
+    margin-top: 0px;
+}
+/*#task-list{
+    overflow: scroll;
+    width: 50%;
+    height: 302px;
+    margin-left: 21%;
+}*/
+
+#task-list{
+        width: auto;
+    margin-left: 16%;
+    margin-right: 16%;
+    height: 301px;
+    overflow: scroll;
 }
